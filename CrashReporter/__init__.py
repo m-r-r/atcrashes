@@ -4,80 +4,12 @@
 import sys
 import traceback
 
-if sys.version_info.major > 3:
-    str = unicode
+from reports import Report
 
+__all__ = ['Report', 'CrashReporter']
 
-class Report(object):
-    """Represents a crash report"""
-
-    def __init__(self, title=None, fields=None, formatter=None):
-        """Create a new Report instance"""
-        self.title = title or sys.argv[0]
-        self.fields = fields or dict()
-        self.fromatter = formatter or ReportFormatter()
-
-    def setTitle(self, title):
-        """Set the title of the report"""
-        self.__title = str(title).capitalize()
-
-    def getTitle(self):
-        """Get the title of the report"""
-        return self.__title
-
-    def setField(self, field, value):
-        """Add or update a field in the report"""
-        self.__fields[field.title()] = str(value)
-
-    def getField(self, field):
-        """Get the content of a field"""
-        return self.__fields.get(field.title(), None)
-
-    def clearField(self, field):
-        """Reset a field"""
-        try: self.__fields.pop(field.title())
-        except: pass
-
-    def getFields(self):
-        """Get all fields"""
-        return self.__fields
-
-    def setFields(self, fields):
-        """Overwrite all fields"""
-        for key, val in fields:
-            self.setFields(key, val)
-
-    def setTraceback(self, tb):
-        """Set the traceback to send"""
-        self.__traceback = tb
-
-    def getTraceback(self):
-        """Fet the traceback"""
-        return self.__traceback
-    
-    def setFormatter(self, formatter):
-        """Set the formatter to use to render the report"""
-        self.__formatter = formatter
-
-    def getFromatter(self):
-        """Get the current formatter"""
-        return self.__fromatter
-
-    def tostring(self):
-        return self.formatter.format_report(self)
-    
-    def __add__(self, other):
-        self.fields = other.fields
-        other.fields = self.fields
-
-    def __sub__(self, other):
-        for field in other.fields.keys()
-            self.clearField(fields)
-
-    title = property(getTitle, setTitle)
-    fields = property(getFields, setFields)
-    fromatter = property(getFormatter, setFormatter)
-    traceback = tb = property(getTraceback, setTraceback)
+if sys.version_info.major < 3:
+    from __builtin__ import unicode as str
 
 
 class ReportFormatter(object):
