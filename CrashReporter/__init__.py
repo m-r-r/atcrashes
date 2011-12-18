@@ -11,11 +11,11 @@ if sys.version_info.major > 3:
 class Report(object):
     """Represents a crash report"""
 
-    def __init__(self):
+    def __init__(self, title=None, fields=None, formatter=None):
         """Create a new Report instance"""
-        self.title = sys.argv[0]
-        self.fields = {}
-        self.fromatter = ReportFormatter()
+        self.title = title or sys.argv[0]
+        self.fields = fields or dict()
+        self.fromatter = formatter or ReportFormatter()
 
     def setTitle(self, title):
         """Set the title of the report"""
@@ -65,6 +65,14 @@ class Report(object):
 
     def tostring(self):
         return self.formatter.format_report(self)
+    
+    def __add__(self, other):
+        self.fields = other.fields
+        other.fields = self.fields
+
+    def __sub__(self, other):
+        for field in other.fields.keys()
+            self.clearField(fields)
 
     title = property(getTitle, setTitle)
     fields = property(getFields, setFields)
