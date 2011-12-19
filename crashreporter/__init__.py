@@ -4,41 +4,14 @@
 import sys
 import traceback
 
-from reports import Report
+from reports import *
+from fromatters import *
 
-__all__ = ['Report', 'CrashReporter']
+__all__ = reports.__all__ + formatters.__all__ + ["enable", "disable", "crashreporter"]
 
 if sys.version_info.major < 3:
     from __builtin__ import unicode as str
 
-
-class ReportFormatter(object):
-    """Default report formatter"""
-
-    def format_report(self, report):
-        """Method called to format the reports"""
-        output = str()
-        output += '-' * len(report.title) + '\n'
-        output += report.title + '\n'
-        output += '-' * len(report.title) + '\n\n'
-        
-        for key, val in report.fields.iteritems():
-            output += key + ': ' + val + '\n'
-
-        return output
-
-class RstReportFormatter(ReportFromatter):
-    """Format a report into ReStruncturedText"""
-
-    def format_output(self, report):
-        output = str()
-        output += report.title + '\n'
-        output += '#' * len(report.title) + '\n\n'
-
-        for key, val in report.fields.iteritems():
-            output += ':' + key + ': ' + val + '\n'
-
-        return output
 
 
 class CrashReporter(object):
@@ -60,6 +33,13 @@ class CrashReporter(object):
         """Deactivate the crash reporter"""
         sys.excepthook = sys.__excepthook__
 
-if __name__ == '__main__':
+
+def enable(*args, **kwargs):
     CrashReporter().enable()
+
+def disable(*args, **kwargs):
+    CrashReporter().disable()
+    
+if __name__ == '__main__':
+    enable()
     raise Exception("Foo")
