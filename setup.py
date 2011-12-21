@@ -5,15 +5,14 @@ from distutils.core import setup
 import sys
 
 setup(
-    name = "crashreporter",
+    name = "atcrashes",
     version = "0.1a",
-    description = "Send a crash report when an application crash",
-    url = "http://github.com/Skami18/CrashReporter",
+    description = "Like atexit, but for crashes",
+    url = "http://github.com/Skami18/atcrashes",
     author = "Mickaël Raybaud-Roig",
     author_email = "skami18.mrr@gmail.com",
-    packages = ['crashreporter'],
+    py_modules = ['atcrashes'],
     classifiers = [
-        'Development Status :: 3 - Alpha',
         'Programming Language :: Python',
         'Intended Audience :: Developers'
     ]
