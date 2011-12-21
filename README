@@ -2,7 +2,7 @@ NAME
     atcrashes
 
 FILE
-    /home/skami/Dev/Python/CrashReporter/atcrashes.py
+    atcrashes.py
 
 DESCRIPTION
     atcrashes.py - allow programmer to define multiple functions to be executed
