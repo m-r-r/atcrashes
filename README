@@ -1,0 +1,22 @@
+NAME
+    atcrashes
+
+FILE
+    /home/skami/Dev/Python/CrashReporter/atcrashes.py
+
+DESCRIPTION
+    atcrashes.py - allow programmer to define multiple functions to be executed
+    upon anormal program termination.
+
+FUNCTIONS
+    register(func, *args, **kwargs)
+        register a function to be executed upon normal program termination
+        
+        func - function to be called if the program crash
+        args - optional arguments to pass to func
+        kwargs - optional keyword arguments to pass to func
+        
+        func is returned to facilitate usage as a decorator.
+
+DATA
+    __all__ = ['register']
